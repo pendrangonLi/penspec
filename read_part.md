@@ -10,6 +10,7 @@
 pass
 ### get_atom_mass
 下面是log文件中包含原子质量信息的区块的例子：
+
  (Nuclear quadrupole moments (NQMom) in fm**2, nuclear magnetic moments (NMagM)
   in nuclear magnetons)
 
