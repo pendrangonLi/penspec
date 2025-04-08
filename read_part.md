@@ -10,7 +10,11 @@
 |get_force|file_name: str : 输入文件名 <br> N: int : 原子数量|shape=N*3的数组 行对应原子，列对应x y z三个方向|从 gaussian log 中读取原子受力|
 ## additional explanation
 ### get_atom_num
-pass
+在log的下面这行中说明了原子数量，如：
+```
+ NAtoms=     34 NQM=       34 NQMF=       0 NMMI=      0 NMMIF=      0
+```
+NAtoms=34即表示有34个原子
 ### get_atom_mass
 下面是log文件中包含原子质量信息的区块的例子：
 ```
