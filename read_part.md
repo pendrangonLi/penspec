@@ -261,4 +261,4 @@ Harmonic frequencies (cm**-1), IR intensities (KM/Mole), Raman scattering
  Cartesian Forces:  Max     0.000125381 RMS     0.000030752
  Z-matrix is all fixed cartesians, so copy forces.
 
- 与原子坐标的读取方式很像，单位本来就是原子单位，不需要转化，直接读取即可
+ 前两列为原子标号与原子序数，不是我们感兴趣的数据，后三列为原子在xyz方向的受力，共N行（N为原子个数），单位本来就是原子单位，不需要转化，直接读取即可，输出N*3的矩阵
