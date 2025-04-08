@@ -13,7 +13,7 @@
 pass
 ### get_atom_mass
 下面是log文件中包含原子质量信息的区块的例子：
-
+```
  (Nuclear quadrupole moments (NQMom) in fm**2, nuclear magnetic moments (NMagM)
   in nuclear magnetons)
 
@@ -54,12 +54,12 @@ pass
  AtZNuc=   7.0000000   6.0000000   7.0000000   1.0000000
  Leave Link  101 at Mon Mar 31 09:13:55 2025, MaxMem=  6442450944 cpu:               5.0 elap:               0.1
  (Enter /opt/gaussian/g16/l103.exe)
-
+```
 1-34表示第1-34个原子，AtmWgt=对应的行为该原子的相对原子质量，最后输出的质量要将单位转化为原子单位制（a.u.）
 
 ### get_coor
 坐标部分数据再文件中有如下格式：
-
+```
                          Standard orientation:                         
  ---------------------------------------------------------------------
  Center     Atomic      Atomic             Coordinates (Angstroms)
@@ -99,12 +99,12 @@ pass
      32          7           0        0.000519   -1.970241   -0.000000
      33          7           0       -2.371171   -2.371261   -0.000000
  ---------------------------------------------------------------------
- 
+``` 
 单位为埃(A)，输出单位需要转化为原子单位值(a.u.)
 
 ### get_omega
 振动频率在文件中有如下格式：
-
+```
 Harmonic frequencies (cm**-1), IR intensities (KM/Mole), Raman scattering
  activities (A**4/AMU), depolarization ratios for plane and unpolarized
  incident light, reduced masses (AMU), force constants (mDyne/A),
@@ -115,12 +115,12 @@ Harmonic frequencies (cm**-1), IR intensities (KM/Mole), Raman scattering
  Red. masses --      4.2496                 4.0272                 3.8453
  Frc consts  --      0.0004                 0.0005                 0.0006
  IR Inten    --      0.1128                 0.2342                 0.1117
-
+```
  其中 1 2 3表示第几个振动模式，共有3N-6 （自由度）个振动模式，" Frequencies --"所在的行为要找的频率，单位为波数cm^{-1}需要转化为原子单位制下的角频率
 
  ### get_mode
  振动模式在文件中有如下格式：
-
+```
   Harmonic frequencies (cm**-1), IR intensities (KM/Mole), Raman scattering
  activities (A**4/AMU), depolarization ratios for plane and unpolarized
  incident light, reduced masses (AMU), force constants (mDyne/A),
@@ -213,12 +213,12 @@ Harmonic frequencies (cm**-1), IR intensities (KM/Mole), Raman scattering
                       A                      A                      A
  Frequencies --     24.6672                26.8592                34.3783
  Red. masses --      2.9805                 4.1983                 4.2894
-
+```
  振动模式信息紧跟在振动频率信息后面，每个振动频率对应一个振动模式， "Frequencies --"行对应振动频率， "Atom  AN "行之后的N行（N为原子个数，这里是77)是振动模式在每个原子上的分量，每个原子有xyz三个坐标所以"Atom  AN "下面的行每行有11列，前两列为原子标号与原子序号，不是我们感兴趣的，后面九列依次为三个振动模式在原子的xyz三个方向上的分量，如11列中的第1列就是第一个振动模式在每个原子的x方向的分量，第2列为y，第4列为第二个振动模式在所有原子的x方向的分量，共有3N-6个振动模式，每个振动模式读取为N*3的矩阵，最后输出(3N-6)*N*3的矩阵
 
  ### get_force
- force部分在log文件中张这样：
-
+ force部分在log文件中有如下形式：
+```
  -------------------------------------------------------------------
  Center     Atomic                   Forces (Hartrees/Bohr)
  Number     Number              X              Y              Z
@@ -260,5 +260,5 @@ Harmonic frequencies (cm**-1), IR intensities (KM/Mole), Raman scattering
  -------------------------------------------------------------------
  Cartesian Forces:  Max     0.000125381 RMS     0.000030752
  Z-matrix is all fixed cartesians, so copy forces.
-
+```
  前两列为原子标号与原子序数，不是我们感兴趣的数据，后三列为原子在xyz方向的受力，共N行（N为原子个数），单位本来就是原子单位，不需要转化，直接读取即可，输出N*3的矩阵
