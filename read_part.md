@@ -5,6 +5,7 @@
 |get_atom_num|filename: str : 输入文件名|N: int :原子数量|从 gaussian log文件中读取体系的原子数量|
 |get_atom_mass|file_name: str : 输入文件名 <br> N: int : 原子数量|M: np.array : 原子质量 shape=N*1| 从 gaussian log文件中读取体系的原子数量 |
 |get_coor|file_name: str : 输入文件名 <br> N: int : 原子数量|shape=N*3的数组 行对应原子，列对应x y z三个方向|从 gaussian log 中读取原子坐标|
+|get_omega|file_name: str : 输入文件名 <br> N: int : 原子数量|shape=（3N-6）*1的数组 3N-6为自由度|从 gaussian log 中读取振动频率|
 ## additional explanation
 ### get_atom_num
 pass
@@ -98,3 +99,19 @@ pass
  ---------------------------------------------------------------------
  
 单位为埃(A)，输出单位需要转化为原子单位值(a.u.)
+
+### get_omega
+振动频率在文件中有如下格式：
+
+Harmonic frequencies (cm**-1), IR intensities (KM/Mole), Raman scattering
+ activities (A**4/AMU), depolarization ratios for plane and unpolarized
+ incident light, reduced masses (AMU), force constants (mDyne/A),
+ and normal coordinates:
+                      1                      2                      3
+                      A                      A                      A
+ Frequencies --     12.1715                14.9956                16.2358
+ Red. masses --      4.2496                 4.0272                 3.8453
+ Frc consts  --      0.0004                 0.0005                 0.0006
+ IR Inten    --      0.1128                 0.2342                 0.1117
+
+ 其中 1 2 3表示第几个振动模式，共有3N-6 （自由度）个振动模式，" Frequencies --"所在的行为要找的频率，单位为波数cm^{-1}需要转化为原子单位制下的角频率
