@@ -14,7 +14,7 @@
 ```
  NAtoms=     34 NQM=       34 NQMF=       0 NMMI=      0 NMMIF=      0
 ```
-NAtoms=34即表示有34个原子
+行中的34即表示有34个原子
 ### get_atom_mass
 下面是log文件中包含原子质量信息的区块的例子：
 ```
