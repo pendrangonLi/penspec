@@ -37,5 +37,5 @@ $记modes为M_o,mass为M,force为F_x有：$
 
 $L=M^{\frac{1}{2}}M_o$
 
-$F = LM^{\frac{-1}{2}}F_x$
+$F = L^T M^{\frac{-1}{2}}F_x$
 
