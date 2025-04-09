@@ -56,11 +56,9 @@ J, K, Gg, Ge = conversion_function2(Lg, Le, omageg, omegae, Fe)
 ### Fe
 激发态每个振动模式的受力，shape=(3N-6)\*1的矩阵
 ### J, K的计算
-记：
-$L^g = Lg, L^e = Le, \omega^g = omegag, \omega^e = omegae, F^e = Fe ,\Gamma^g=Gg, \Gamma^e=Ge$
-
-有：
-
+记：<br>
+$L^g = Lg, L^e = Le, \omega^g = omegag, \omega^e = omegae, F^e = Fe ,\Gamma^g=Gg, \Gamma^e=Ge$ <br>
+有：<br>
 $J = {L^e}^TL^g $
 
 $K = -{\omega^e}^{-1}F^e$
@@ -69,3 +67,16 @@ $\Gamma^g = \omega^g$
 
 $\Gamma^e = \omega^e$
 
+## conversion_function3
+用来生成FC积分求解所需的几个关键矩阵<br>
+input: J,K,Gg,Ge <br>
+output: A,b,C,d,E <br>
+调用格式：<br>
+A, b, C, d, E = conversion_function2(J, K, Gg, Ge) <br>
+### 计算公式
+$$ \Gamma=Gg, \Gamma'=Ge $$ <br>
+$$	A = 2\Gamma'^{1/2}J(J^T\Gamma'J+\Gamma)^{-1}J^T\Gamma'^{1/2} - I $$ <br>
+$$	b = 2\Gamma'^{1/2}[I - J(J^T\Gamma'J+\Gamma)^{-1}J^T\Gamma']K $$ <br>
+$$	C = 2\Gamma^{1/2}(J^T\Gamma'J+\Gamma)^{-1}\Gamma^{1/2} - I $$ <br>
+$$	d = -2\Gamma^{1/2}(J^T\Gamma'J+\Gamma)^{-1}J^T\Gamma'K $$ <br>
+$$	E = 4\Gamma^{1/2}(J^T\Gamma'J+\Gamma)^{-1}J^T\Gamma'^{1/2} $$ <br>
