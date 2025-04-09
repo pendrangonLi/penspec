@@ -67,3 +67,16 @@ $\Gamma^g = \omega^g$
 
 $\Gamma^e = \omega^e$
 
+## conversion_function3
+用来生成FC积分求解所需的几个关键矩阵<br>
+input: J,K,Gg,Ge <br>
+output: A,b,C,d,E <br>
+调用格式：<br>
+A, b, C, d, E = conversion_function2(J, K, Gg, Ge) <br>
+### 计算公式
+$$ \Gamma=Gg, \Gamma'=Ge $$ <br>
+$$	A = 2\Gamma'^{1/2}J(J^T\Gamma'J+\Gamma)^{-1}J^T\Gamma'^{1/2} - I $$ <br>
+$$	b = 2\Gamma'^{1/2}[I - J(J^T\Gamma'J+\Gamma)^{-1}J^T\Gamma']K $$ <br>
+$$	C = 2\Gamma^{1/2}(J^T\Gamma'J+\Gamma)^{-1}\Gamma^{1/2} - I $$ <br>
+$$	d = -2\Gamma^{1/2}(J^T\Gamma'J+\Gamma)^{-1}J^T\Gamma'K $$ <br>
+$$	E = 4\Gamma^{1/2}(J^T\Gamma'J+\Gamma)^{-1}J^T\Gamma'^{1/2} $$ <br>
