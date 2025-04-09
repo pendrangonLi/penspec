@@ -37,6 +37,7 @@ L, F = conversion_function1(modes, mass, force)
 $记modes为M_o,mass为M,force为F_x有：$
 
 $L=M^{\frac{1}{2}}M_o$
+这里需要将L的每一列进行归一化，输出和后续计算的L都是归一化之后的L
 
 $F = L^T M^{\frac{-1}{2}}F_x$
 
