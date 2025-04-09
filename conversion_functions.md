@@ -33,7 +33,7 @@ L, F = conversion_function1(modes, mass, force)
 ### force
 受力矩阵，3N\*1的矩阵，依次为某原子在xyz方向的受力
 ### L, F的计算
-记modes为$M_o$,mass为$M$,force为$F_x$有：
+$记modes为M_o,mass为M,force为F_x有：$
 
 $L=M^{\frac{1}{2}}M_o$
 
