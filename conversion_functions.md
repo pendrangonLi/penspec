@@ -18,3 +18,24 @@ modes是一个shape=(3N-6)\*N\*3的数组 3N-6对应振动模式数量 N对应�
 force是shape=N*3的数组 行对应原子，列对应x y z三个方向，需要转变为3N\*1的矩阵force1，对应关系为force[3i+k,1]=force[i, k];i=1,2,..,N;k=1,2,3;
 ### 注意
 我写的ijk索引都是从1开始的如M[1,2]就表示矩阵M的第1行第2列的元素，再代码中索引是从0开始的，你可能得注意并避免这中间可能会导致的bug
+
+## conversion_function1
+这个函数用于计算无量纲振动模式L和振动模式的受力F
+input: modes, mass, force
+ouput: L, F
+调用格式：
+L, F = conversion_function1(modes, mass, force)
+参数解释：
+### modes 
+振动模式，3N\*(3N-6)的矩阵，没一列表示一个振动模式
+### mass
+质量矩阵，3N\*3N的矩阵，只有主对角线上的元素不为0，对角线上的元素每三个表示同一个原子的质量
+### force
+受力矩阵，3N\*1的矩阵，依次为某原子在xyz方向的受力
+### L, F的计算
+记modes为$M_o$,mass为$M$,force为$F_x$有：
+
+$L=M^{\frac{1}{2}}M_o$
+
+$F = LM^{\frac{-1}{2}}F_x$
+
