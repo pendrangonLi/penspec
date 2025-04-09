@@ -1,10 +1,10 @@
 # some function to convert variable
 代码语言：python
 ## conversion_function0
-该函数主要用于reshape输入数据，将其转变为方便运算的形式
-输入变量有mass, omega, modes, force四个参数，输出新的mass, omega, modes, force。
-调用形式是mass, omega, modes, force = conversion_function0(mass, omega, modes, force)
-下面将介绍输入与输出变量的信息
+该函数主要用于reshape输入数据，将其转变为方便运算的形式 <br>
+输入变量有mass, omega, modes, force四个参数，输出新的mass, omega, modes, force。 <br>
+调用形式是mass, omega, modes, force = conversion_function0(mass, omega, modes, force) <br>
+下面将介绍输入与输出变量的信息 <br>
 ### mass
 mass是shape=N\*1的数组 N为原子数量，物理意义是原子的质量，需要将其reshape为一个3N\*3N的矩阵，矩阵只有主对角线上元素不为0，
 主对角线上的值共有3N个其中第1-3个值等于原mass的第一个值，4-6对应原mass的第2个值，以此类推最后得到新的mass矩阵，记为mass1，对应关系为mass1[3i+k,3i+k]=mass[i,1];i=1,2,...,N;k=1,2,3;
