@@ -1,5 +1,6 @@
 # generate function to caculate FC overlap
 使用语言： python
+注意我写的索引都是从1开始的，但再代码中0才是第一个，你需要对索引进行调整。
 ## FCFromZero(N, n, A, b, C, d, E)
 计算<i_k|0>积分的函数，i=1-n;k=1-N; <br>
 input: N, n, A, b, C, d, E <br>
