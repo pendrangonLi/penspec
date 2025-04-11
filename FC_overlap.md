@@ -1,6 +1,5 @@
 # generate function to caculate FC overlap
 使用语言： python
-注意我写的索引都是从1开始的，但再代码中0才是第一个，你需要对索引进行调整。
 ## FCFromZero(N, n, A, b, C, d, E)
 计算<i_k|0>积分的函数，i=1-n;k=1-N; <br>
 input: N, n, A, b, C, d, E <br>
@@ -33,7 +32,7 @@ b,d: N\*1矩阵 <br>
 ### 输出参数
 FCfrom1: n\*N的矩阵
 ### 计算
-FCfrom1[1,k] = b[k,0] / sqrt(2) <br>
+FCfrom1[0,k] = b[k,0] / sqrt(2) <br>
 从第二行开始满足：<br>
 `FCfrom1[i,k] = (b[k]*FCfrom0[i,k] + sqrt(i/2)*E[k,k]*FCfrom0[i-1,k])/sqrt(2)`
 
