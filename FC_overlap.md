@@ -72,6 +72,8 @@ HTfrom1: n\*N\*N的矩阵
 ### 计算
 i=0, j!=k时: <br>
 `HTfrom1[0,k,j] = (d[j] * FCfrom1[0,k] + (C[j,k]+C[k,j])*FCfrom0[0,k]/sqrt(2)) / sqrt(omega[j]) / 2 ` <br>
+j=k时：<br>
+`HTfrom1[0,k,j] = ((d[j] * FCfrom1[0,k] + (C[j,k]+C[k,j])*FCfrom0[0,k]/sqrt(2))*sqrt(2) + FCfrom0[0,k]) / sqrt(2*omega[j])  ` <br>
 从i>0,j!=k开始满足：<br>
 `HTfrom1[0,k,j] = (d[j] * FCfrom1[0,k] + (C[j,k]+C[k,j])*FCfrom0[0,k]/sqrt(2) + E[j,k]*FCfrom1[i-1,k]/sqrt(i/2)) / sqrt(omega[j]) / 2 ` <br>
 j=k时：<br>
