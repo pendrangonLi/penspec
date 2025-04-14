@@ -58,7 +58,7 @@ HTfrom0[0,k,j] = d[j] / sqrt(omega[j]) / 2 <br>
 ## HTfromOne(FCfrom0, FCfrom1, N, n, omega, A, b, C, d, E)
 计算<i_k|Q_j|1_k>积分的函数，i=1-n;k=1-N,j=1-N; <br>
 input: FCfrom0, FCfrom1, N, n, omega, A, b, C, d, E <br>
-output: HTfrom0 <br>
+output: HTfrom1 <br>
 参数说明： <br>
 ### 输入参数
 FCfrom0, FCfrom1：N*N矩阵 <br>
