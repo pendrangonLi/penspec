@@ -14,7 +14,7 @@ b,d: N\*1矩阵 <br>
 FCfrom0: n\*N的矩阵
 ### 计算
 FCfrom0[0,:] = 1 <br>
-FCfrom0[1,k] = b[k] / sqrt(2) <br>
+FCfrom0[1,k] = b[k,0] / sqrt(2) <br>
 从第三行开始满足递推关系：<br>
 `FCfrom0[i,k] = (b[k, 0] * FCfrom0[i-1,k] + sqrt(2 * (i - 1)) * A[k,k] * FCfrom0[i-2,k]) / sqrt(2 * i)`
 
@@ -32,9 +32,9 @@ b,d: N\*1矩阵 <br>
 ### 输出参数
 FCfrom1: n\*N的矩阵
 ### 计算
-FCfrom1[0,k] = b[k] / sqrt(2) <br>
+FCfrom1[0,k] = b[k,0] / sqrt(2) <br>
 从第二行开始满足：<br>
-`FCfrom1[i,k] = (b[k]*FCfrom0[i,k] + sqrt(i/2)*E[k,k]*FCfrom0[i-1,k])/sqrt(2)`
+`FCfrom1[i,k] = (b[k,0]*FCfrom0[i,k] + sqrt(i/2)*E[k,k]*FCfrom0[i-1,k])/sqrt(2)`
 
 ## HTfromZero(FCfrom0, N, n, omega, A, b, C, d, E)
 计算<i_k|Q_j|0>积分的函数，i=1-n;k=1-N,j=1-N; <br>
@@ -51,9 +51,9 @@ b,d: N\*1矩阵 <br>
 ### 输出参数
 HTfrom0: n\*N\*N的矩阵
 ### 计算
-HTfrom0[0,k,j] = d[j] / sqrt(omega[j]) / 2 <br>
+HTfrom0[0,k,j] = d[j,0] / sqrt(omega[j]) / 2 <br>
 从第二行开始满足：<br>
-`HTfrom0[i,k,j] = (d[j]*FCfrom0[i,k] + sqrt(i/2)*E[j,k]*FCfrom0[i-1,k]) / sqrt(omega[j]) / 2`
+`HTfrom0[i,k,j] = (d[j,0]*FCfrom0[i,k] + sqrt(i/2)*E[j,k]*FCfrom0[i-1,k]) / sqrt(omega[j]) / 2`
 
 ## HTfromOne(FCfrom0, FCfrom1, N, n, omega, A, b, C, d, E)
 计算<i_k|Q_j|1_k>积分的函数，i=1-n;k=1-N,j=1-N; <br>
@@ -71,10 +71,10 @@ b,d: N\*1矩阵 <br>
 HTfrom1: n\*N\*N的矩阵
 ### 计算
 i=0, j!=k时: <br>
-`HTfrom1[0,k,j] = (d[j] * FCfrom1[0,k] + (C[j,k]+C[k,j])*FCfrom0[0,k]/sqrt(2)) / sqrt(omega[j]) / 2 ` <br>
+`HTfrom1[0,k,j] = (d[j,0] * FCfrom1[0,k] + (C[j,k]+C[k,j])*FCfrom0[0,k]/sqrt(2)) / sqrt(omega[j]) / 2 ` <br>
 j=k时：<br>
-`HTfrom1[0,k,j] = ((d[j] * FCfrom1[0,k] + (C[j,k]+C[k,j])*FCfrom0[0,k]/sqrt(2))*sqrt(2) + FCfrom0[0,k]) / sqrt(2*omega[j])  ` <br>
+`HTfrom1[0,k,j] = ((d[j,0] * FCfrom1[0,k] + (C[j,k]+C[k,j])*FCfrom0[0,k]/sqrt(2))*sqrt(2) + FCfrom0[0,k]) / sqrt(2*omega[j])  ` <br>
 从i>0,j!=k开始满足：<br>
-`HTfrom1[i,k,j] = (d[j] * FCfrom1[0,k] + (C[j,k]+C[k,j])*FCfrom0[0,k]/sqrt(2) + E[j,k]*FCfrom1[i-1,k]/sqrt(i/2)) / sqrt(omega[j]) / 2 ` <br>
+`HTfrom1[i,k,j] = (d[j,0] * FCfrom1[0,k] + (C[j,k]+C[k,j])*FCfrom0[0,k]/sqrt(2) + E[j,k]*FCfrom1[i-1,k]/sqrt(i/2)) / sqrt(omega[j]) / 2 ` <br>
 j=k时：<br>
-`HTfrom1[i,k,j] = ((d[j] * FCfrom1[0,k] + (C[j,k]+C[k,j])*FCfrom0[0,k]/sqrt(2) + E[j,k]*FCfrom1[i-1,k]/sqrt(i/2))*sqrt(2) + FCfrom0[i,k]) / sqrt(2*omega[j])  ` <br>
+`HTfrom1[i,k,j] = ((d[j,0] * FCfrom1[0,k] + (C[j,k]+C[k,j])*FCfrom0[0,k]/sqrt(2) + E[j,k]*FCfrom1[i-1,k]/sqrt(i/2))*sqrt(2) + FCfrom0[i,k]) / sqrt(2*omega[j])  ` <br>
