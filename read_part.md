@@ -8,6 +8,7 @@
 |get_omega|file_name: str : 输入文件名 <br> N: int : 原子数量|shape=（3N-6）*1的数组 3N-6为自由度|从 gaussian log 中读取振动频率|
 |get_mode|file_name: str : 输入文件名 <br> N: int : 原子数量|shape=(3N-6)*N*3的数组 3N-6对应振动模式数量 N对应原子，3对应x y z三个方向|从 gaussian log 中读取振动模式的分量|
 |get_force|file_name: str : 输入文件名 <br> N: int : 原子数量|shape=N*3的数组 行对应原子，列对应x y z三个方向|从 gaussian log 中读取原子受力|
+|get_etdm_gard|file_name: str : 输入文件名 <br> N: int : 原子数量|shape=N*3的数组 行对应原子，列对应x y z三个方向|从 gaussian log 中读取跃迁偶极矩|
 ## additional explanation
 ### get_atom_num
 在log的下面这行中说明了原子数量，如：
