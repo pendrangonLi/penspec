@@ -8,7 +8,7 @@
 |get_omega|file_name: str : 输入文件名 <br> N: int : 原子数量|shape=（3N-6）*1的数组 3N-6为自由度|从 gaussian log 中读取振动频率|
 |get_mode|file_name: str : 输入文件名 <br> N: int : 原子数量|shape=(3N-6)*N*3的数组 3N-6对应振动模式数量 N对应原子，3对应x y z三个方向|从 gaussian log 中读取振动模式的分量|
 |get_force|file_name: str : 输入文件名 <br> N: int : 原子数量|shape=N*3的数组 行对应原子，列对应x y z三个方向|从 gaussian log 中读取原子受力|
-|get_etdm_gard|file_name: str : 输入文件名 <br> N: int : 原子数量|shape=3N*3的数组 行对应原子，列对应x y z三个方向|从 gaussian log 中读取跃迁偶极矩|
+|get_etdm_gard|file_name: str : 输入文件名 <br> N: int : 原子数量|shape=3N*3的数组 行对应原子，列对应x y z三个方向|从 gaussian log 中读取跃迁偶极矩梯度|
 ## additional explanation
 ### get_atom_num
 在log的下面这行中说明了原子数量，如：
@@ -268,7 +268,7 @@ Harmonic frequencies (cm**-1), IR intensities (KM/Mole), Raman scattering
 ```
  前两列为原子标号与原子序数，不是我们感兴趣的数据，后三列为原子在xyz方向的受力，共N行（N为原子个数），单位本来就是原子单位，不需要转化，直接读取即可，输出N*3的矩阵
 
- ## get_etdm_gard
+ ### get_etdm_gard
 跃迁偶极矩在文件中有如下形式：
 ```
  Electronic Transition Derivatives
@@ -295,5 +295,7 @@ Harmonic frequencies (cm**-1), IR intensities (KM/Mole), Raman scattering
       3   0.156517D-05  0.325154D+00  0.748143D-01 -0.977005D-05 -0.471575D+00
       4  -0.428794D-02 -0.479974D-05  0.426920D-05  0.812256D-01  0.116640D-04
       5   0.000000D+00  0.255215D-01  0.966170D-02  0.000000D+00 -0.242235D-01
+...
+-----------------
 ```
-从 Electronic Transition Derivatives开始下面是一些16行5列的数据块（第一列的1-16表示行索引，行的1-5或6-10等表示列索引，不算数据），实际上是16行3N+3列的数据，但每个5列会整体换行，所以变成里一块块的16行5列的矩阵，其中第2,3,4行对应的跃迁偶极矩梯度的xyz分量，每一列对应一个原子，需要你读取每一列的第2，3，4行，得到3N+3行3列的矩阵A，A的第i行表示跃迁偶极矩的xyz分量对第i个原子的梯度。最后去掉A的前三行，输出3N\*3的矩阵
+从 "Electronic Transition Derivatives"开始，到"-----------------"结束中间的数据是我们要处理的区域，其中每一行为共有以空格分隔的数据若干，请将第一个元素是2的行的行的数据整合到一个数组中（每行开头的2不需要加入），同样的方法得到第一个元素是3的所有行的数据，以及第一个是4的数据，将这三个数组输出
