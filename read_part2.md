@@ -1,4 +1,11 @@
- ### get_etdm_grad
+# generate some function to read basis info
+使用python完成以下函数，不准用re库的正则表达式
+## function table
+|function name|input|output|basis explain|
+|-----|----|---|---|
+|get_etdm_grad|file_name: str : 输入文件名 <br> N: int : 原子数量|shape=3N*3的数组 行对应原子，列对应x y z三个方向|从 gaussian log 中读取跃迁偶极矩梯度|
+## additional explanation
+### get_etdm_grad
 跃迁偶极矩在文件中有如下形式：
 ```
  Electronic Transition Derivatives
@@ -28,4 +35,4 @@
 ...
 -----------------
 ```
-从 "Electronic Transition Derivatives"开始，到空行结束中间的数据是我们要处理的区域（不包括开头和结束行），其中每一行为共有以空格分隔的数据若干，首先你需要对每一行进行分割变成一个列表，并将所有的'D'换成'e'，再将列表转化为数组，然后将所有第一个元素是2的数组去掉第一个数并拼接起来，将所有第一个元素是2的数组去掉第一个数并拼接起来，输出这两个数组
+从 "Electronic Transition Derivatives"开始，到空行结束中间的数据是我们要处理的区域（不包括开头和结束行），其中每一行为共有以空格分隔的数据若干，首先你需要对每一行进行分割变成一个列表，并将所有的'D'换成'e'，再将列表转化为数组，然后将所有第一个元素是2的数组去掉第一个数并拼接起来，将所有第一个元素是3的数组去掉第一个数并拼接起来，将所有第一个元素是4的数组去掉第一个数并拼接起来，将这三个数组推起来，去掉前三列，输出剩余数据
