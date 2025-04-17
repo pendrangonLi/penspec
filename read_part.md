@@ -1,4 +1,5 @@
 # generate some function to read basis info
+使用python完成以下函数，不准用re库的正则表达式
 ## function table
 |function name|input|output|basis explain|
 |-----|----|---|---|
