@@ -14,11 +14,11 @@ HT0: n\*N\*N 数组，n为最大振动量子数，N为振动模式数量
 ### 函数实现
 ```
 alpha0,alpha1为n*N*3数组 
-alpha0[n, k] = etdm[0] * FC0[n, k] + sum_j{etdm_grad[j] * HT0[n, k, j]}
-alpha1[n, k] = etdm[0] * FC1[n, k] + sum_j{etdm_grad[j] * HT1[n, k, j]}
+alpha0[n, k] = etdm * FC0[n, k] + sum_j{etdm_grad[j] * HT0[n, k, j]}
+alpha1[n, k] = etdm * FC1[n, k] + sum_j{etdm_grad[j] * HT1[n, k, j]}
 
 alpha33 为 N*3*3数组
-alpha33[k] = sum_n{np.outer(alpha0[n, k], alpha1[n, k]) / sqrt((omega00 + omega[k,0]*n - omega)^2 + Gamma^2)}
+alpha33[k] = sum_n{np.outer(alpha0[n, k], alpha1[n, k]) / sqrt((omega00 + omega[k]*n - omega)^2 + Gamma^2)}
 
 ```
 ### 输出 alpha33
