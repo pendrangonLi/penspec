@@ -21,7 +21,7 @@ alpha0 = etdm[np.newaxis, :,:] * FC0[:,:,np.newaxis] + np.sum(etdm_grad[np.newax
 alpha1 = etdm[np.newaxis, :,:] * FC1[:,:,np.newaxis] + np.sum(etdm_grad[np.newaxis, np.newaxis, :,:] * HT1[:,:,:,np.newaxis], axis=2)
 
 alpha33 为 N*3*3数组
-alpha33[k] = sum_n{np.outer(alpha0[n, k], alpha1[n, k]) / sqrt((omega00 + omega[k]*n - omega)^2 + Gamma^2)}
+alpha33[k] = sum_n{np.outer(alpha0[n, k], alpha1[n, k]) * Gamma / sqrt((omega00 + omega[k]*n - omega)^2 + Gamma^2)}
 
 alpha, a, b2, c2 为N*1的数组
 a[k] = np.trace(alpha33[k])
