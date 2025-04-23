@@ -7,7 +7,7 @@
 |get_atom_mass|file_name: str : 输入文件名 <br> N: int : 原子数量|M: np.array : 原子质量 shape=N\*1| 从 gaussian log文件中读取体系的原子数量 |
 |get_coor|file_name: str : 输入文件名 <br> N: int : 原子数量|shape=N*3的数组 行对应原子，列对应x y z三个方向|从 gaussian log 中读取原子坐标|
 |get_omega|file_name: str : 输入文件名 <br> N: int : 原子数量|shape=（3N-6）\*1的数组 3N-6为自由度|从 gaussian log 中读取振动频率|
-|get_mode|file_name: str : 输入文件名 <br> N: int : 原子数量|shape=(3N-6)\*3N的数组 3N-6对应振动模式数量 N对应原子，3对应x y z三个方向|从 gaussian log 中读取振动模式的分量|
+|get_mode|file_name: str : 输入文件名 <br> N: int : 原子数量|shape=(3N-6)\*N\*3的数组 3N-6对应振动模式数量 N对应原子，3对应x y z三个方向|从 gaussian log 中读取振动模式的分量|
 |get_force|file_name: str : 输入文件名 <br> N: int : 原子数量|shape=N*3的数组 行对应原子，列对应x y z三个方向|从 gaussian log 中读取原子受力|
 ## additional explanation
 ### get_atom_num
@@ -127,7 +127,7 @@
    2     1     6          0.00000  -0.00003  -0.15854   0.00000   0.00000
 ...
 ```
- 其中 1 2 3表示第几个振动模式，共有3N-6 （自由度）个振动模式，" Frequencies --- "所在的行即为要找的频率，你需要找到" Frequencies --- "所在的行，读取改行" Frequencies --- "后面的以空格分割的数字为浮点数列表，并extend到omega中。最后将omega 变为array，并将其reshape为3N-6行1列并return
+ 其中 1 2 3表示第几个振动模式，共有3N-6 （自由度）个振动模式，" Frequencies --- "所在的行即为要找的频率，你需要找到" Frequencies --- "所在的行，读取改行" Frequencies --- "后面的以空格分割的数字为浮点数列表，并extend到omega中。最后将omega 变为array，并将其reshape为3N-6行1列，最后将其乘以constant.E_wavenum2au 并输出（constant是已经import了的库）
 
  ### get_mode
  振动模式在文件中有如下格式：
@@ -168,7 +168,7 @@
    1     8     1         -0.00001   0.00003   0.14614  -0.00001  -0.00000
 ...
 ```
-你需要找到所有' Frequencies --- '所在的行，其后后面的第5到3N+4行（闭区间）的数据是我们需要处理的区域，该区域是3N行若干列的数据，同一行的数据以空格分割，你需要将该区域的数据转化为array，并将所有的这样的区域的array去掉前三列并通过hstack拼起来，最后得到一个3N行若干列的array，输出这个array
+你需要找到所有' Frequencies --- '所在的行，其后后面的第5到3N+4行（闭区间）的数据是我们需要处理的区域，该区域是3N行若干列的数据，同一行的数据以空格分割，你需要将该区域的数据转化为array，并将所有的这样的区域的array去掉前三列并通过hstack拼起来，最后得到一个3N行3N-6列的array，将这个array转置并reshape为(3N-6)\*N\*3的数组并输出
 
  ### get_force
  force部分在log文件中有如下形式：
