@@ -36,12 +36,12 @@ alpha = 45 * a ** 2 + 7 * b2 + 5 * c2
 ## show_spec(omega, alpha, gamma, x)
 展宽alpha为光谱
 ### 输入说明
-'''
+```
 omega: N*1 array 振动模式频率
 alpha: N*1 array
 gamma: 浮点数 rrs展宽
 x: 一维数组 光谱范围
-'''
+```
 ### 函数实现
 ```
 I = np.sum(alpha * gamma / np.sqrt((omega - x) ** 2 + gamma ** 2， axis=0)
