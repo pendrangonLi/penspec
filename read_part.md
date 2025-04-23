@@ -172,8 +172,8 @@ A为空列表
 将文件通过readlines读取为列表，记为D
 ind = 文件中所有包含 " Frequencies ---"的行的index
 for i in ind:
- a = D[i+5 : i+5+3*N]
- 将a转化为二维array（a每行至少有4个数据）
+ a = D[i+5 : i+5+3*N] #a是行如[['1.1 2.2 3.3'],['1.2 2.3 3.4']]这样的二维列表有3N行，至少4列
+ 将a转化为二维array
  A.append(a[:, 3:])
 A = np.hstack(A).T
 A = A.reshape(-1,N,3)
