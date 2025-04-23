@@ -63,8 +63,9 @@
 1-34表示第1-34个原子，"AtmWgt="行对应的数据该原子的相对原子质量，每行最多10个原子，超过10个原子会换行由于每次是9行一起输出的，"AtmWgt="行下次出现是在+9行后，最后输出的质量要将单位转化为原子单位制（a.u.），乘以constant.M_AtomW2au即可（constant已经import了）
 
 ### get_coor
-坐标部分数据在文件中有如下格式：
 ```
+坐标部分数据在文件中有如下格式：
+...
                          Standard orientation:                         
  ---------------------------------------------------------------------
  Center     Atomic      Atomic             Coordinates (Angstroms)
@@ -104,13 +105,13 @@
      32          7           0        0.000519   -1.970241   -0.000000
      33          7           0       -2.371171   -2.371261   -0.000000
  ---------------------------------------------------------------------
-``` 
+...
 单位为埃(A)，输出单位需要转化为原子单位值(a.u.)
-
+```
 ### get_omega
+```
 将要输出的变量记为omega，omega开始为空列表
 振动频率在文件中有如下格式：
-```
 ...
  Harmonic frequencies (cm**-1), IR intensities (KM/Mole), Raman scattering
  activities (A**4/AMU), depolarization ratios for plane and unpolarized
@@ -126,13 +127,12 @@
    1     1     6          0.00000   0.00001   0.02730  -0.00000  -0.00000
    2     1     6          0.00000  -0.00003  -0.15854   0.00000   0.00000
 ...
-```
- 其中 1 2 3表示第几个振动模式，共有3N-6 （自由度）个振动模式，" Frequencies --- "所在的行即为要找的频率，你需要找到" Frequencies --- "所在的行，读取改行" Frequencies --- "后面的以空格分割的数字为浮点数列表，并extend到omega中。最后将omega 变为array，并将其reshape为3N-6行1列，最后将其乘以constant.E_wavenum2au 并输出（constant是已经import了的库）
 
- ### get_mode
- A为空列表
- 振动模式在文件中有如下格式：
+ 其中 1 2 3表示第几个振动模式，共有3N-6 （自由度）个振动模式，" Frequencies --- "所在的行即为要找的频率，你需要找到" Frequencies --- "所在的行，读取改行" Frequencies --- "后面的以空格分割的数字为浮点数列表，并extend到omega中。最后将omega 变为array，并将其reshape为3N-6行1列，最后将其乘以constant.E_wavenum2au 并输出（constant是已经import了的库）
 ```
+ ### get_mode
+```
+ 振动模式在文件中有如下格式：
 ...
  Harmonic frequencies (cm**-1), IR intensities (KM/Mole), Raman scattering
  activities (A**4/AMU), depolarization ratios for plane and unpolarized
@@ -168,8 +168,17 @@
    3     7     1          0.15719   0.26670  -0.00008  -0.05977  -0.18231
    1     8     1         -0.00001   0.00003   0.14614  -0.00001  -0.00000
 ...
+A为空列表
+将文件通过readlines读取为列表，记为D
+ind = 文件中所有包含 " Frequencies ---"的行的index
+for i in ind:
+ a = D[i+5 : i+3*N+5]
+ 将a转化为二维array
+ A.append(a[:, 3:])
+A = np.hstack(A).T
+A = A.reshape(-1,N,3)
+return A
 ```
-你需要找到所有' Frequencies --- '所在的行，其后面的第5到3N+4行（闭区间）的数据是我们需要处理的区域，这样的区域是3N行若干列（最少4列，最多8列）的数据，同一行的数据以空格分割，你需要将该区域的数据转化为二维array，记为a。将a[:,3:] append到A中。A = np.hstack(A).T。A=A.reshape(-1,N,3)。输出A
 
  ### get_force
  force部分在log文件中有如下形式：
